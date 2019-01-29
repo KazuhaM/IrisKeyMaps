@@ -15,7 +15,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#pragma once
+#ifndef CONFIG_USER_H
+#define CONFIG_USER_H
+
+#include "config_common.h"
 
 /* Use I2C or Serial, not both */
 
@@ -23,14 +26,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define USE_I2C
 
 /* Select hand configuration */
-
+#define PERMISSIVE_HOLD
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 // #define EE_HANDS
-
+/*
 #undef RGBLED_NUM
 #define RGBLIGHT_ANIMATIONS
 #define RGBLED_NUM 12
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
+*/
+#define TAPPING_TERM 200
+#include "../../config.h"
+
+#endif
