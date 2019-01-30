@@ -1,42 +1,20 @@
-//#include "iris.h"
 #include "action_layer.h"
-//#include "eeconfig.h"
 #include QMK_KEYBOARD_H
-#include "keymap_jp.h"
-//#include "action.h"
+//#include "keymap_jp.h"
 
 extern keymap_config_t keymap_config;
 
-//keycode shorthands
-#define K___  KC_TRNS // three underscores "NO" for transparent
-
-#define KC_SEN  MO(1)
-#define KC_SJP  MO(3)
-
-//#define KC_MARK TT(4)
-//#define KC_NMAL TO(5)
-
-//layer shorthands
-#define _MDVORAK 0
-#define _SMDVORAK 1
-#define _MSKYTOUCH 2
-#define _SMSKYTOUCH 3
-//#define _MARK 4
-//#define _NMAL 5
-
 enum {
-//	SFT_LCK //tapdance declarations
     MDVORAK = 0,
     SMDVORAK,
     MSKYTOUCH,
     SMSKYTOUCH,
-//    MARK, //
- //   NMAL, //
+    MARK,
+    NMALE, //
+    NMALJ,
+    FUNC
 };
 enum custom_keycodes {
-//    CHIME,
-//    ETOJ,
-
     DI_UU= SAFE_RANGE,
     DI_AI,
     DI_OU,
@@ -54,25 +32,49 @@ enum custom_keycodes {
 
     DM_BRCT,
     DM_BRCTL,
-
+    DM_BRCTM,
+    DM_SSTT,
     D_MID,
+
     D_ETOJ,
     D_JTOE
 };
 
-//diphthong
+
+//keycode shorthands
+#define K___  KC_TRNS // three underscores "NO" for transparent
+
+//layer change
+#define KC_SEN  MO(1)
+#define KC_SJP  MO(3)
+#define KC_MRKE TT(4)
+#define KC_MRKJ TT(5)
+#define KC_NUME TT(6)
+#define KC_NUMJ TT(7)
+#define KC_FNCE TT(8)
+#define KC_FNCJ TT(9)
+#define KC_TOE TO(0)
+#define KC_TOJ TO(2)
+
+//layer shorthands
+#define _MDVORAK 0
+#define _SMDVORAK 1
+#define _MSKYTOUCH 2
+#define _SMSKYTOUCH 3
+#define _MARKE 4
+#define _MARKJ 5
+#define _NMALE 6
+#define _NMALJ 7
+#define _FUNCE 8
+#define _FUNCJ 9
+
+
+//IME change
 #define KC_JTOE D_JTOE
-#define KC_ETOJ D_ETOJ//#define KC_TOE TO(0)
-//#define KC_TOJ TO(2)
-//#define KC_CHIME CHIME
-//#define KC_ETOJ ETOJ
-//#define KC_TMPE TO(0)
-//#define KC_TMPJ TO(2)
+#define KC_ETOJ D_ETOJ
+#define KC_CHIME LALT(KC_GRAVE)
 
-//#define KC_CHIME LALT(KC_GRAVE)
-
-//#define KC_ETOJ KC_HENK | DF(2)
-
+//diphthong
 #define KC_DUU DI_UU
 #define KC_DAI DI_AI
 #define KC_DOU DI_OU
@@ -90,19 +92,180 @@ enum custom_keycodes {
 
 #define KC_DBRCT DM_BRCT
 #define KC_DBRCTL DM_BRCTL
+#define KC_DBRCTM DM_BRCTM
+#define KC_SSTT DM_SSTT
 
 #define KC_DMID D_MID
 
-//#define KC_IMER D_IME
+#define KC_NP0 M(0)
+#define KC_NP1 M(1)
+#define KC_NP2 M(2)
+#define KC_NP3 M(3)
+#define KC_NP4 M(4)
+#define KC_NP5 M(5)
+#define KC_NP6 M(6)
+#define KC_NP7 M(7)
+#define KC_NP8 M(8)
+#define KC_NP9 M(9)
+#define KC_NPDOT M(10)
+#define KC_NPEQL M(11)
+#define KC_NPPLS M(12)
+#define KC_NPMNS M(13)
+#define KC_NPAST M(14)
+#define KC_NPSLS M(15)
+#define KC_NPCMM M(16)
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
+	[_MDVORAK] = LAYOUT_kc(
+  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     TAB ,COMM, M  , R  , P  , Y                 , F  , G  , C  , DOT, L  ,BSPC,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     LSFT, A  , O  , E  , U  , I                 , J  , H  , T  , N  , S  , D  ,
+  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+     LCTL,LGUI, B  , X  , K  , DEL, NO      ,ETOJ,BSPC, V  , Z  , Q  ,W   ,ENT ,
+  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
+                       LALT, SPC, SEN         ,MRKE, ENT,FNCE
+  //                  `----+----+----'        `----+----+----'
+  ),
+
+    [_SMDVORAK] = LAYOUT(
+  //,-------+--------+--------+--------+--------+--------.                     ,--------+--------+--------+--------+--------+--------.
+     KC_ESC , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6                        , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 ,
+  //|-------+--------+--------+--------+--------+--------|                     |--------+--------+--------+--------+--------+--------|
+     KC_TAB , KC_SCLN, S(KC_M), S(KC_R), S(KC_P), S(KC_Y)                      , S(KC_F), S(KC_G), S(KC_C), KC_COLN, S(KC_L), KC_BSPC,
+  //|-------+--------+--------+--------+--------+--------|                     |--------+--------+--------+--------+--------+--------|
+     KC_LSFT, S(KC_A), S(KC_O), S(KC_E), S(KC_U), S(KC_I)                      , S(KC_J), S(KC_H), S(KC_T), S(KC_N), S(KC_S), S(KC_D),
+  //|-------+--------+--------+--------+--------+--------+--------.    ,-------|--------+--------+--------+--------+--------+--------|
+     KC_LCTL, KC_LGUI, S(KC_B), S(KC_X), S(KC_K), KC_DEL ,KC_CHIME     ,KC_CHIME, KC_BSPC, S(KC_V), S(KC_Z), S(KC_Q), S(KC_W), KC_ENT,
+  //`-------+--------+--------+--------+--------+--------+--------/    \-------+--------+--------+--------+--------+--------+--------'
+                                         KC_LALT, KC_SPC , KC_SEN      ,KC_NUME, KC_ENT ,KC_FNCE
+  //                                    `-------+--------+--------'    `-------+--------+--------'
+  ),
+   
+    [_MSKYTOUCH] = LAYOUT_kc(
+  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,BSPC,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
+  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+     LCTL,LGUI, B  , W  , X  , DEL,JTOE     , NO ,BSPC,DANN,DONN,DINN,DENN,ENT ,
+  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
+                       LALT, SPC, SJP         ,MRKJ, ENT,FNCJ
+  //                  `----+----+----'        `----+----+----'
+  ),
+    
+    [_SMSKYTOUCH] = LAYOUT_kc(
+  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
+     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     TAB ,SCLN, V  , J  , F  , Q                 , DUI, DAU, DOI,COLN, DIU,BSPC,
+  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
+     LSFT, B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,DMID,
+  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
+     LCTL,LGUI, B  , W  , X  , DEL,CHIME    ,CHIME,BSPC,DANN,DONN,DINN,DENN,ENT,
+  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
+                       LALT, SPC, SJP         ,NUMJ, ENT,FNCJ
+  //                  `----+----+----'        `----+----+----'
+  ),
+
+    [_MARKE] = LAYOUT(
+  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
+     KC_ESC , KC_F2     , KC_F3     , KC_F4     , KC_F5     , KC_F6                                 , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_F11    , KC_F12    ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     KC_TAB , KC_COMM   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC_BSPC   ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     KC_LSFT, KC_QUOT	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
+  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
+     KC_LCTL, KC_LGUI   , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_TOE         , KC_ETOJ  , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC_ENT    ,
+  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
+                                                  KC_LALT   , KC_SPC    , KC_NO          , KC_TOE   , KC_ENT    , KC_FNCE
+  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
+  ),
+
+    [_MARKJ] = LAYOUT(
+  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
+     KC_ESC , KC_F2     , KC_F3     , KC_F4     , KC_F5     , KC_F6                                 , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_F11    , KC_F12    ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     KC_TAB , KC_COMM   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC_BSPC   ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     KC_LSFT, KC_QUOT	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
+  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
+     KC_LCTL, KC_LGUI   , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_JTOE        ,KC_TOJ    , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC_ENT    ,
+  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
+                                                  KC_LALT   , KC_SPC    , KC_NO          ,KC_TOJ   , KC_ENT    , KC_FNCJ
+  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
+  ),
+
+    [_NMALE] = LAYOUT_kc(
+  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
+     ESC    , F2        , F3        , F4        , F5        , F6                                    , F7        , F8        , NPSLS     , NPAST     , F11       , NLCK     ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     TAB    , NO        , HOME      , UP        , END       , AMPR                                  , NPEQL     , NP7       , NP8       , NP9       , NPMNS     , BSPC      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     LSFT   , ENT    	  , LEFT      , DOWN      , RGHT      , DBRCT                                 , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
+     LCTL   , LGUI      , PGUP      , SPC       , PGDN      , DEL	      , TOE            , ETOJ     , BSPC      , NP1       , NP2       , NP3       , NPSLS     , ENT       ,
+  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
+                                                  LALT      , SPC       , NO             , MRKE     , NP0       , NPDOT
+  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
+  ),
+
+    [_NMALJ] = LAYOUT_kc(
+  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
+     ESC    , F2        , F3        , F4        , F5        , F6                                    , F7        , F8        , NPSLS     , NPAST     , F11       , NLCK      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     TAB    , NO        , HOME      , UP        , END       , AMPR                                  , NPEQL     , NP7       , NP8       , NP9       , NPMNS     , BSPC      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     LSFT   , ENT    	  , LEFT      , DOWN      , RGHT      , DBRCT                                 , NPAST     , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
+     LCTL   , LGUI      , PGUP      , SPC       , PGDN      , DEL	      , JTOE           , TOJ      , BSPC      , NP1       , NP2       , NP3       , NPCMM     , END       ,
+  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
+                                                  LALT      , SPC       , NO             , MRKE     , NP0       , NPDOT
+  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
+  ),
+
+    [_FUNCE] = LAYOUT_kc(
+  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
+     ESC    , F2        , F3        , F4        , F5        , F6                                    , F7        , F8        , F9        , F10       , F11       , F12       ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     TAB    , F1        , NO        , NO        , NO        , AMPR                                  , NO        , HOME      , UP        , END       , NO        , BSPC      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     LSFT   , NO    	  , NO        , INS       , PSCR      , NO                                    , NO        , LEFT      , DOWN      , RGHT      , NO        , NO        ,
+  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
+     LCTL   , LGUI      , NO        , NO        , NO        , DEL	      , TOE            , ETOJ     , BSPC      , PGUP      , NO        , PGDN      , NO        , ENT       ,
+  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
+                                                  LALT      , SPC       , NO             , TOE      , ENT       , TOE
+  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
+  ),
+
+    [_FUNCJ] = LAYOUT_kc(
+  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
+     ESC    , F2        , F3        , F4        , F5        , F6                                    , F7        , F8        , F9        , F10       , F11       , F12       ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     TAB    , F1        , NO        , NO        , NO        , AMPR                                  , NO        , HOME      , UP        , END       , NO        , BSPC      ,
+  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
+     LSFT   , NO    	  , NO        , INS       , PSCR      , NO                                    , NO        , LEFT      , DOWN      , RGHT      , NO        , NO        ,
+  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
+     LCTL   , LGUI      , NO        , NO        , NO        , DEL	      , JTOE           , TOJ      , BSPC      , PGUP      , NO        , PGDN      , NO        , ENT       ,
+  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
+                                                  LALT      , SPC       , NO             , TOJ      , ENT      , TOJ
+  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
+  ),
+};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case DI_UU:
       if (record->event.pressed) {
-        // when keycode DI_AI is pressed
+        // when keycode DI_UU is pressed
         SEND_STRING("uu");
       } else {
-        // when keycode DI_AI is released
+        // when keycode DI_UU is released
       }
       return false;
       break;
@@ -232,6 +395,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case DM_BRCTM:
+      if (record->event.pressed) {
+        // when keycode DM_BRCTM is pressed
+        SEND_STRING("{}"SS_TAP(X_LEFT));
+      } else {
+        // when keycode DM_BRCTM is released
+      }
+      return false;
+      break;
+    case DM_SSTT:
+      if (record->event.pressed) {
+        // when keycode DM_SSTT is pressed
+        SEND_STRING("<-");
+      } else {
+        // when keycode DM_SSTT is released
+      }
+      return false;
+      break;
     case D_MID:
       if (record->event.pressed) {
         // when keycode D_MID is pressed
@@ -243,21 +424,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case D_JTOE:
       if (record->event.pressed) {
-        // when keycode D_MID is pressed
+        // when keycode D_JTOE is pressed
         SEND_STRING(SS_LALT(SS_TAP(X_GRAVE)));
-        layer_move(0);
+        layer_clear();
+        layer_on(0);
       } else {
-        // when keycode D_MID is released
+        // when keycode D_JTOE is released
       }
       return false;
       break;
     case D_ETOJ:
       if (record->event.pressed) {
-        // when keycode D_MID is pressed
+        // when keycode D_ETOJ is pressed
         SEND_STRING(SS_LALT(SS_TAP(X_GRAVE)));
-        layer_move(2);
+        layer_clear();
+        layer_on(2);
       } else {
-        // when keycode D_MID is released
+        // when keycode D_ETOJ is released
       }
       return false;
       break;
@@ -265,63 +448,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 };
 
-
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-	[_MDVORAK] = LAYOUT_kc(
-  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, M  , R  , P  , Y                 , F  , G  , C  , DOT, L  ,HOME,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, A  , O  , E  , U  , I                 , J  , H  , T  , N  , S  , D  ,
-  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , X  , K  , DEL, NO      ,ETOJ,BSPC, V  , Z  , Q  ,W   ,END ,
-  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL, SPC, SEN         ,NO, ENT, NO 
-  //                  `----+----+----'        `----+----+----'
-  ),
-
-    [_SMDVORAK] = LAYOUT(
-  //,-------+--------+--------+--------+--------+--------.                     ,--------+--------+--------+--------+--------+--------.
-     KC_ESC , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6                        , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 , KC_F12 ,
-  //|-------+--------+--------+--------+--------+--------|                     |--------+--------+--------+--------+--------+--------|
-     KC_TAB , KC_SCLN, S(KC_M), S(KC_R), S(KC_P), S(KC_Y)                      , S(KC_F), S(KC_G), S(KC_C), KC_COLN, S(KC_L), KC_HOME,
-  //|-------+--------+--------+--------+--------+--------|                     |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, S(KC_A), S(KC_O), S(KC_E), S(KC_U), S(KC_I)                      , S(KC_J), S(KC_H), S(KC_T), S(KC_N), S(KC_S), S(KC_D),
-  //|-------+--------+--------+--------+--------+--------+--------.    ,-------|--------+--------+--------+--------+--------+--------|
-     KC_LCTL, KC_LGUI, S(KC_B), S(KC_X), S(KC_K), KC_DEL , KC_NO       ,KC_ETOJ, KC_BSPC, S(KC_V), S(KC_Z), S(KC_Q), S(KC_W), KC_END ,
-  //`-------+--------+--------+--------+--------+--------+--------/    \-------+--------+--------+--------+--------+--------+--------'
-                                         KC_LCTL, KC_SPC , KC_SEN      ,KC_NO , KC_ENT ,KC_NO
-  //                                    `-------+--------+--------'    `-------+--------+--------'
-  ),
-   
-    [_MSKYTOUCH] = LAYOUT_kc(
-  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,HOME,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
-  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , W  , X  , DEL,JTOE     , NO ,BSPC,DANN,DONN,DINN,DENN,END ,
-  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL, SPC, SJP         ,NO, ENT, NO 
-  //                  `----+----+----'        `----+----+----'
-  ),
-    
-    [_SMSKYTOUCH] = LAYOUT_kc(
-  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,SCLN, V  , J  , F  , Q                 , DUI, DAU, DOI,COLN, DIU,HOME,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,DMID,
-  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , W  , X  , DEL,ETOJ     , NO ,BSPC,DANN,DONN,DINN,DENN,END ,
-  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL, SPC, SJP         ,NO, ENT, NO 
-  //                  `----+----+----'        `----+----+----'
-  ),
-   
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
+    if (record->event.pressed) {
+        switch(id) {
+            case 0:
+                return MACRO(T(NLCK), T(P0), T(NLCK), END);
+            case 1:
+                return MACRO(T(NLCK), T(P1), T(NLCK), END);
+            case 2:
+                return MACRO(T(NLCK), T(P2), T(NLCK), END);
+            case 3:
+                return MACRO(T(NLCK), T(P3), T(NLCK), END);
+            case 4:
+                return MACRO(T(NLCK), T(P4), T(NLCK), END);
+            case 5:
+                return MACRO(T(NLCK), T(P5), T(NLCK), END);
+            case 6:
+                return MACRO(T(NLCK), T(P6), T(NLCK), END);
+            case 7:
+                return MACRO(T(NLCK), T(P7), T(NLCK), END);
+            case 8:
+                return MACRO(T(NLCK), T(P8), T(NLCK), END);
+            case 9:
+                return MACRO(T(NLCK), T(P9), T(NLCK), END);
+            case 10:
+                return MACRO(T(NLCK), T(PDOT), T(NLCK), END);
+            case 11:
+                return MACRO(T(NLCK), T(PEQL), T(NLCK), END);
+            case 12:
+                return MACRO(T(NLCK), T(PPLS), T(NLCK), END);
+            case 13:
+                return MACRO(T(NLCK), T(PMNS), T(NLCK), END);
+            case 14:
+                return MACRO(T(NLCK), T(PAST), T(NLCK), END);
+            case 15:
+                return MACRO(T(NLCK), T(PSLS), T(NLCK), END);
+            case 16:
+                return MACRO(T(NLCK), T(PCMM), T(NLCK), END);
+        }
+    }
+    return MACRO_NONE;
 };
