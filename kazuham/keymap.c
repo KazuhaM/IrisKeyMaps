@@ -42,7 +42,6 @@ enum custom_keycodes {
     DM_BRCTL,
     DM_BRCTM,
     DM_SSTT,
-    D_MID,
 
     //function code
     DF_RNMSH,
@@ -109,7 +108,6 @@ enum custom_keycodes {
 #define KC_DENN DN_ENN
 
 //mark
-#define KC_DMID D_MID
 #define KC_DBRCT DM_BRCT
 #define KC_DBRCTL DM_BRCTL
 #define KC_DBRCTM DM_BRCTM
@@ -207,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC_TAB , C(KC_Y)   , KC_NO     , G(KC_R)   , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC_BSPC   ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LSFT, C(KC_S)   , C(KC_A)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
+     KC_LSFT, C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC_LCTL, C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_DEL	  , KC_TOE         , KC_ETOJ  , KC_BSPC   , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC_ENT    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
@@ -254,7 +252,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      TAB ,SCLN, V  , J  , F  , Q                 , DUI, DAU, DOI,COLN, DIU,BSPC,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,DMID,
+     LSFT, B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,SLSH,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
      LCTL,LGUI, B  , W  , X  , DEL,CHIME    ,CHIME,BSPC,DANN,DONN,DINN,DENN,ENT,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
@@ -299,7 +297,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC_TAB , C(KC_Y)   , KC_NO     , G(KC_R)   , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC_BSPC   ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LSFT, C(KC_S)   , C(KC_A)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
+     KC_LSFT, C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC_LCTL, C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_DEL	  , KC_JTOE        , KC_TOJ   , KC_BSPC   , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC_ENT    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
@@ -480,15 +478,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("<-");
       } else {
         // when keycode DM_SSTT is released
-      }
-      return false;
-      break;
-    case D_MID:
-      if (record->event.pressed) {
-        // when keycode D_MID is pressed
-        SEND_STRING("・");
-      } else {
-        // when keycode D_MID is released
       }
       return false;
       break;
