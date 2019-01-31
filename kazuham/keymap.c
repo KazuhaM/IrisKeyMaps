@@ -155,15 +155,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //shifted English keymap
     [_SMDVORAK] = LAYOUT(
   //,-------+--------+--------+--------+--------+--------.                      ,---------+---------+---------+---------+---------+--------.
-     KC_ESC , KC_F2  , KC_F3  , KC_F4  , KC_F5  , KC_F6                         , KC_F7   , KC_F8   , KC_F9   , KC_F10  , KC_F11  , KC_F12 ,
+     KC____ , KC____ , KC____ , KC____ , KC____ , KC____                        , KC____  , KC____  , KC____  , KC____  , KC____  , KC____ ,
   //|-------+--------+--------+--------+--------+--------|                      |---------+---------+---------+---------+---------+--------|
-     KC_TAB , KC_SCLN, S(KC_M), S(KC_R), S(KC_P), S(KC_Y)                       , S(KC_F) , S(KC_G) , S(KC_C) , KC_COLN , S(KC_L) , KC_BSPC,
+     KC____ , KC_SCLN, S(KC_M), S(KC_R), S(KC_P), S(KC_Y)                       , S(KC_F) , S(KC_G) , S(KC_C) , KC_COLN , S(KC_L) , KC____ ,
   //|-------+--------+--------+--------+--------+--------|                      |---------+---------+---------+---------+---------+--------|
-     KC_LSFT, S(KC_A), S(KC_O), S(KC_E), S(KC_U), S(KC_I)                       , S(KC_J) , S(KC_H) , S(KC_T) , S(KC_N) , S(KC_S) , S(KC_D),
+     KC____ , S(KC_A), S(KC_O), S(KC_E), S(KC_U), S(KC_I)                       , S(KC_J) , S(KC_H) , S(KC_T) , S(KC_N) , S(KC_S) , S(KC_D),
   //|-------+--------+--------+--------+--------+--------+--------.    ,--------|---------+---------+---------+---------+---------+--------|
-     KC_LCTL, KC_LGUI, S(KC_B), S(KC_X), S(KC_K), KC_DEL ,KC_CHIME     ,KC_CHIME, KC_BSPC , S(KC_V) , S(KC_Z) , S(KC_Q) , S(KC_W) , KC_ENT ,
+     KC____ , KC_LGUI, S(KC_B), S(KC_X), S(KC_K), KC____ ,KC_CHIME     ,KC_CHIME, KC____  , S(KC_V) , S(KC_Z) , S(KC_Q) , S(KC_W) , KC____ ,
   //`-------+--------+--------+--------+--------+--------+--------/    \--------+---------+---------+---------+---------+---------+--------'
-                                         KC_FNCE, KC_SPC , KC_SEN      ,KC_NUME , KC_ENT  , KC_LALT
+                                         KC_FNCE, KC____ , KC_SEN      ,KC_NUME , KC____  , KC____
   //                                    `-------+--------+--------'    `--------+---------+--------'
   ),
   
@@ -171,45 +171,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //mark (symbol) keymap for english (IME: off)
     [_MARKE] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC_ESC , KC_F2     , KC_F3     , KC_F4     , KC_F5     , KC_F6                                 , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_F11    , KC_F12    ,
+     KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_TAB , KC_QUOT   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC_BSPC   ,
+     KC____ , KC_QUOT   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LSFT, KC_DQT	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
+     KC____ , KC_DQT	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LCTL, KC_LGUI   , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_TOE         , KC_ETOJ  , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC_ENT    ,
+     KC____ , KC____    , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_TOE         , KC_ETOJ  , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_FNCE   , KC_SPC    , KC_NO          , KC_TOE   , KC_ENT    , KC_LALT
+                                                  KC_FNCE   , KC____    , KC_NO          , KC_TOE   , KC____    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //number and allows keymap for english (IME: off)
     [_NMALE] = LAYOUT_kc(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ESC    , ___       , ___       , ___       , ___       , ___                                   , ___       , BSLS      , NPSLS     , NPAST     , ___       , NLCK      ,
+     ___    , ___       , ___       , ___       , ___       , ___                                   , ___       , BSLS      , NPSLS     , NPAST     , ___       , NLCK      ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     TAB    , DLR       , HOME      , UP        , END       , AMPR                                  , NPEQL     , NP7       , NP8       , NP9       , NPMNS     , BSPC      ,
+     ___    , DLR       , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     LSFT   , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
+     ___    , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     LCTL   , LGUI      , PGUP      , SPC       , PGDN      , DEL	      , TOE            , ETOJ     , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ENT       ,
+     ___    , ___       , PGUP      , SPC       , PGDN      , DEL	      , TOE            , ETOJ     , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  FNCE      , SPC       , TOE            , MRKE     , NP0       , LALT
+                                                  FNCE      , ___       , TOE            , MRKE     , NP0       , ___
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //function keymap for english (IME: off)
     [_FUNCE] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC_ESC , KC_F1     , KC____    , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , A(KC_G)   , A(KC_S)   , LCA(KC_DEL),
+     KC____ , KC_F1     , KC____    , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , A(KC_G)   , A(KC_S)   , LCA(KC_DEL),
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_TAB , C(KC_Y)   , KC_NO     , G(KC_R)   , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC_BSPC   ,
+     KC____ , C(KC_Y)   , G(KC_R)   , KC_D      , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LSFT, C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
+     KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LCTL, C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_DEL	  , KC_TOE         , KC_ETOJ  , KC_BSPC   , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC_ENT    ,
+     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC____	  , KC_TOE         , KC_ETOJ  , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_TOE    , KC_SPC    , KC_SFE         , KC_MRKE  , KC_ENT    , KC_LALT
+                                                  KC_TOE    , KC____    , KC_SFE         , KC_MRKE  , KC_ENT    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -239,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , W  , X  , DEL,JTOE     , NO ,BSPC,DANN,DONN,DINN,DENN,ENT ,
+     LCTL,LGUI, B  , X  , W  , DEL,JTOE     , NO ,BSPC,DANN,DONN,DINN,DENN,ENT ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
                        FNCJ, SPC, SJP         ,MRKJ, ENT,LALT
   //                  `----+----+----'        `----+----+----'
@@ -248,60 +248,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //shifted Japanese keymap
     [_SMSKYTOUCH] = LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
+     ___ , ___, ___, ___, ___, ___               , ___, ___, ___, ___, ___, ___,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,SCLN, V  , J  , F  , Q                 , DUI, DAU, DOI,COLN, DIU,BSPC,
+     ___ ,SCLN, V  , J  , F  , Q                 , DUI, DAU, DOI,COLN, DIU,___ ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,SLSH,
+     ___ , B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,SLSH,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , W  , X  , DEL,CHIME    ,CHIME,BSPC,DANN,DONN,DINN,DENN,ENT,
+     ___ ,___ , B  , X  , W  , ___,CHIME    ,CHIME,___,DANN,DONN,DINN,DENN,___ ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       FNCJ, SPC, SJP         ,NUMJ, ENT,LALT
+                       FNCJ, ___, SJP         ,NUMJ, ___,___
   //                  `----+----+----'        `----+----+----'
   ),
 
   //mark (symbol) keymap for Japanese (IME: on)
     [_MARKJ] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC_ESC , KC_F2     , KC_F3     , KC_F4     , KC_F5     , KC_F6                                 , KC_F7     , KC_F8     , KC_F9     , KC_F10    , KC_F11    , KC_F12    ,
+     KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_TAB , KC_QUOT   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC_BSPC   ,
+     KC____ , KC_QUOT   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LSFT, KC_DQT 	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
+     KC____ , KC_DQT 	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LCTL, KC_LGUI   , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_JTOE        ,KC_TOJ    , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC_ENT    ,
+     KC____ , KC_LGUI   , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_JTOE        ,KC_TOJ    , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_FNCJ   , KC_SPC    , KC_NO          ,KC_TOJ   , KC_ENT    , KC_LALT
+                                                  KC_FNCJ   , KC____    , KC_NO          ,KC_TOJ   , KC____    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //number and allows keymap for Japanese (IME: on)
     [_NMALJ] = LAYOUT_kc(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ESC    , ___       , ___       , ___       , ___       , ___                                   , ___       , BSLS      , NPSLS     , NPAST     , ___       , NLCK      ,
+     ___    , ___       , ___       , ___       , ___       , ___                                   , ___       , BSLS      , NPSLS     , NPAST     , ___       , NLCK      ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     TAB    , DLR       , HOME      , UP        , END       , AMPR                                  , NPEQL     , NP7       , NP8       , NP9       , NPMNS     , BSPC      ,
+     ___    , DLR       , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     LSFT   , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
+     ___    , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     LCTL   , LGUI      , PGUP      , SPC       , PGDN      , DEL	      , JTOE           , TOJ      , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ENT       ,
+     ___    , LGUI      , PGUP      , SPC       , PGDN      , DEL	      , JTOE           , TOJ      , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  FNCJ      , SPC       , TOJ            , MRKJ     , NP0       , LALT
+                                                  FNCJ      , ___       , TOJ            , MRKJ     , NP0       , ___
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //function keymap for Japanese (IME: on)
     [_FUNCJ] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC_ESC , KC_F1     , KC____    , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , A(KC_G)   , A(KC_S)   , LCA(KC_DEL),
+     KC____ , KC_F1     , KC_NO     , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , A(KC_G)   , A(KC_S)   , LCA(KC_DEL),
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_TAB , C(KC_Y)   , KC_NO     , G(KC_R)   , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC_BSPC   ,
+     KC____ , C(KC_Y)   , G(KC_R)   , KC_D      , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LSFT, C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
+     KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC_LCTL, C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_DEL	  , KC_JTOE        , KC_TOJ   , KC_BSPC   , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC_ENT    ,
+     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC____	  , KC_JTOE        , KC_TOJ   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_TOJ    , KC_SPC    , KC_SFJ         , KC_MRKJ  , KC_ENT    , KC_LALT
+                                                  KC_TOJ    , KC____    , KC_SFJ         , KC_MRKJ  , KC_ENT    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
