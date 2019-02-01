@@ -29,6 +29,14 @@ enum custom_keycodes {
     DI_AU,
     DI_OI,
     DI_IU,
+    DI_AA,
+    DI_AE,
+    DI_OO,
+    DI_OA,
+    DI_II,
+    DI_IA,
+    DI_EA,
+    DI_IO,
 
     //-n codes for JP
     DN_UNN,
@@ -36,6 +44,9 @@ enum custom_keycodes {
     DN_ONN,
     DN_INN,
     DN_ENN,
+
+    //DN_WO
+    DN_WO,
     
     //mark codes
     DM_BRCT,
@@ -72,14 +83,14 @@ enum custom_keycodes {
 
 //layer change
 #define KC_TOE TO(0)
-#define KC_SEN  MO(1)
+#define KC_SEN LT(1,KC_SPC)
 #define KC_MRKE TT(2)
 #define KC_NUME TT(3)
 #define KC_FNCE TT(4)
 #define KC_SFE  MO(5)
 
 #define KC_TOJ TO(6)
-#define KC_SJP  MO(7)
+#define KC_SJP LT(7,KC_SPC)
 #define KC_MRKJ TT(8)
 #define KC_NUMJ TT(9)
 #define KC_FNCJ TT(10)
@@ -99,6 +110,14 @@ enum custom_keycodes {
 #define KC_DAU DI_AU
 #define KC_DOI DI_OI
 #define KC_DIU DI_IU
+#define KC_DAA DI_AA
+#define KC_DAE DI_AE
+#define KC_DOO DI_OO
+#define KC_DOA DI_OA
+#define KC_DII DI_II
+#define KC_DIA DI_IA
+#define KC_DEA DI_EA
+#define KC_DIO DI_IO
 
 //-n
 #define KC_DUNN DN_UNN
@@ -106,6 +125,9 @@ enum custom_keycodes {
 #define KC_DONN DN_ONN
 #define KC_DINN DN_INN
 #define KC_DENN DN_ENN
+
+//DN_WO
+#define KC_DWO DN_WO
 
 //mark
 #define KC_DBRCT DM_BRCT
@@ -142,13 +164,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, M  , R  , P  , Y                 , F  , G  , C  , DOT, L  ,BSPC,
+     TAB ,COMM, M  , R  , P  , Y                 , F  , G  , C  , DOT, L  ,RSFT,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      LSFT, A  , O  , E  , U  , I                 , J  , H  , T  , N  , S  , D  ,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , X  , K  , DEL, NO      ,ETOJ,BSPC, V  , Z  , Q  ,W   ,ENT ,
+     LGUI, B  ,QUOT, X  , K  , DEL, NO      ,ETOJ,BSPC, V  , Z  , Q  ,W   ,ENT ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       FNCE, SPC, SEN         ,MRKE, ENT,LALT
+                       LCTL,FNCE, SEN         ,ENT ,MRKE ,LALT
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -161,9 +183,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------+--------|                      |---------+---------+---------+---------+---------+--------|
      KC____ , S(KC_A), S(KC_O), S(KC_E), S(KC_U), S(KC_I)                       , S(KC_J) , S(KC_H) , S(KC_T) , S(KC_N) , S(KC_S) , S(KC_D),
   //|-------+--------+--------+--------+--------+--------+--------.    ,--------|---------+---------+---------+---------+---------+--------|
-     KC____ , KC_LGUI, S(KC_B), S(KC_X), S(KC_K), KC____ ,KC_CHIME     ,KC_CHIME, KC____  , S(KC_V) , S(KC_Z) , S(KC_Q) , S(KC_W) , KC____ ,
+     KC____ , S(KC_B), KC_DQT , S(KC_X), S(KC_K), KC____ ,KC_CHIME     ,KC_CHIME, KC____  , S(KC_V) , S(KC_Z) , S(KC_Q) , S(KC_W) , KC____ ,
   //`-------+--------+--------+--------+--------+--------+--------/    \--------+---------+---------+---------+---------+---------+--------'
-                                         KC_FNCE, KC____ , KC_SEN      ,KC_NUME , KC____  , KC____
+                                         KC____ , KC_FNCE, KC_SEN      , KC____ , KC_NUME , KC____
   //                                    `-------+--------+--------'    `--------+---------+--------'
   ),
   
@@ -179,14 +201,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC____    , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_TOE         , KC_ETOJ  , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_FNCE   , KC____    , KC_NO          , KC_TOE   , KC____    , KC____
+                                                  KC____    , KC_FNCE    , KC_NO          , KC____   , KC_TOE    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //number and allows keymap for english (IME: off)
     [_NMALE] = LAYOUT_kc(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ___    , ___       , ___       , ___       , ___       , ___                                   , ___       , BSLS      , NPSLS     , NPAST     , ___       , NLCK      ,
+     ___    , ___       , ___       , ___       , ___       , ___                                   , BSLS      , CIRC      , NPSLS     , NPAST     , ___       , NLCK      ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      ___    , DLR       , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
@@ -194,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      ___    , ___       , PGUP      , SPC       , PGDN      , DEL	      , TOE            , ETOJ     , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  FNCE      , ___       , TOE            , MRKE     , NP0       , ___
+                                                  ___       , FNCE      , TOE            , NP0      , MRKE      , ___
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -207,9 +229,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC____	  , KC_TOE         , KC_ETOJ  , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
+     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC_TOE         , KC_ETOJ  , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_TOE    , KC____    , KC_SFE         , KC_MRKE  , KC_ENT    , KC____
+                                                  KC____    , KC_TOE    , KC_NO          , KC_ENT   , KC_SFE    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -224,7 +246,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC____    , KC____    , KC____    , KC____    , KC____	  , KC_TOE         , KC_ETOJ  , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_TOE    , KC____    , KC_SFE         , KC_MRKE  , KC____    , KC____
+                                                  KC____    , KC_TOE    , KC_NO          , KC____   , KC_SFE    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -235,13 +257,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,BSPC,
+     TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,RSFT,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LCTL,LGUI, B  , X  , W  , DEL,JTOE     , NO ,BSPC,DANN,DONN,DINN,DENN,ENT ,
+     LGUI, B  , L  , X  , DWO, DEL,JTOE     , NO ,BSPC, DAU, DOI, DII, DEA,ENT ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       FNCJ, SPC, SJP         ,MRKJ, ENT,LALT
+                       LCTL,FNCJ, SJP         ,ENT ,MRKJ,LALT
   //                  `----+----+----'        `----+----+----'
   ),
   
@@ -250,13 +272,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      ___ , ___, ___, ___, ___, ___               , ___, ___, ___, ___, ___, ___,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ ,SCLN, V  , J  , F  , Q                 , DUI, DAU, DOI,COLN, DIU,___ ,
+     ___ ,SCLN, V  , J  , F  , Q                 , DUI, DAA, DOO,COLN, DIU,___ ,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      ___ , B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,SLSH,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___ ,___ , B  , X  , W  , ___,CHIME    ,CHIME,___,DANN,DONN,DINN,DENN,___ ,
+     ___ ,___ , C  , ___, ___, ___,CHIME    ,CHIME,___, DAE, DOA, DIA, DIO,___ ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       FNCJ, ___, SJP         ,NUMJ, ___,___
+                       ___ ,FNCJ, SJP         ,___ ,NUMJ,___
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -269,24 +291,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC_DQT 	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC_LGUI   , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_JTOE        ,KC_TOJ    , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
+     KC____ , KC____    , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_JTOE        ,KC_TOJ    , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_FNCJ   , KC____    , KC_NO          ,KC_TOJ   , KC____    , KC____
+                                                   KC____   , KC_FNCJ   , KC_NO          ,KC____    , KC_TOJ    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //number and allows keymap for Japanese (IME: on)
     [_NMALJ] = LAYOUT_kc(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ___    , ___       , ___       , ___       , ___       , ___                                   , ___       , BSLS      , NPSLS     , NPAST     , ___       , NLCK      ,
+     ___    , ___       , ___       , ___       , ___       , ___                                   , BSLS      , CIRC      , NPSLS     , NPAST     , ___       , NLCK      ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      ___    , DLR       , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      ___    , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , LGUI      , PGUP      , SPC       , PGDN      , DEL	      , JTOE           , TOJ      , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
+     ___    , ___       , PGUP      , SPC       , PGDN      , DEL	      , JTOE           , TOJ      , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  FNCJ      , ___       , TOJ            , MRKJ     , NP0       , ___
+                                                  ___       , FNCJ      , TOJ            , NP0      , MRKJ       , ___
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -299,9 +321,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC____	  , KC_JTOE        , KC_TOJ   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
+     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC_JTOE        , KC_TOJ   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_TOJ    , KC____    , KC_SFJ         , KC_MRKJ  , KC_ENT    , KC____
+                                                  KC____    , KC_TOJ    , KC_NO          , KC_ENT   , KC_SFJ    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -316,7 +338,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC____    , KC____    , KC____    , KC____    , KC____	  , KC_JTOE        , KC_TOJ   , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_TOJ    , KC____    , KC_SFJ         , KC_MRKJ  , KC____    , KC____
+                                                  KC____    , KC_TOJ    , KC_NO          , KC____   , KC_SFJ    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -397,6 +419,77 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when keycode DI_IU is released
       }
       return false;
+    case DI_AE:
+      if (record->event.pressed) {
+        // when keycode DI_AE is pressed
+        SEND_STRING("ae");
+      } else {
+        // when keycode DI_AE is released
+      }
+      return false;
+      break;
+    case DI_AA:
+      if (record->event.pressed) {
+        // when keycode DI_AA is pressed
+        SEND_STRING("aa");
+      } else {
+        // when keycode DI_AA is released
+      }
+      return false;
+      break;
+    case DI_OA:
+      if (record->event.pressed) {
+        // when keycode DI_OA is pressed
+        SEND_STRING("oa");
+      } else {
+        // when keycode DI_OA is released
+      }
+      return false;
+      break;
+    case DI_OO:
+      if (record->event.pressed) {
+        // when keycode DI_OO is pressed
+        SEND_STRING("oo");
+      } else {
+        // when keycode DI_OO is released
+      }
+      return false;
+      break;
+    case DI_IA:
+      if (record->event.pressed) {
+        // when keycode DI_IA is pressed
+        SEND_STRING("ia");
+      } else {
+        // when keycode DI_IA is released
+      }
+      return false;
+      break;
+    case DI_II:
+      if (record->event.pressed) {
+        // when keycode DI_II is pressed
+        SEND_STRING("ii");
+      } else {
+        // when keycode DI_II is released
+      }
+      return false;
+      break;
+    case DI_EA:
+      if (record->event.pressed) {
+        // when keycode DI_IU is pressed
+        SEND_STRING("ea");
+      } else {
+        // when keycode DI_EA is released
+      }
+      return false;
+      break;
+    case DI_IO:
+      if (record->event.pressed) {
+        // when keycode DI_IO is pressed
+        SEND_STRING("io");
+      } else {
+        // when keycode DI_IO is released
+      }
+      return false;
       break;
   //macros for -n
     case DN_UNN:
@@ -441,6 +534,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("enn");
       } else {
         // when keycode DI_ENN is released
+      }
+      return false;
+      break;
+    case DN_WO:
+      if (record->event.pressed) {
+        // when keycode DI_WO is pressed
+        SEND_STRING("wo");
+      } else {
+        // when keycode DI_WO is released
       }
       return false;
       break;
