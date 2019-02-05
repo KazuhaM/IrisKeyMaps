@@ -42,8 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 150
 #define TAPPING_TOGGLE 2
 #include "../../config.h"
-#define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped this number of times again. */
-#define ONESHOT_TIMEOUT 150  /* Time (in ms) before the one shot key is released */
+
 
 
 #endif

@@ -15,9 +15,7 @@ enum {
     FUNCE,
     SFUNCE,
     FUNCJ,
-    SFUNCJ,
-    JPSpExt,
-    JPSpExtK
+    SFUNCJ
 };
 
 //define macro
@@ -50,56 +48,7 @@ enum custom_keycodes {
     //DN_WO, TSU
     DN_WO,
     DN_TSU,
-
-    //special extension
-    SE_KK,
-    SE_KT,
-    SE_KN,
-    SE_KS,
-    SE_KM,
-    SE_KR,
-    SE_KB,
-    SE_SK,
-    SE_ST,
-    SE_SN,
-    SE_SS,
-    SE_SM,
-    SE_SR,
-    SE_SB,
-    SE_TK,
-    SE_TT,
-    SE_TN,
-    SE_TS,
-    SE_TM,
-    SE_TR,
-    SE_TB,
-    SE_HK,
-    SE_HT,
-    SE_HN,
-    SE_HS,
-    SE_HM,
-    SE_HR,
-    SE_HB,
-    SE_MK,
-    SE_MT,
-    SE_MN,
-    SE_MS,
-    SE_MM,
-    SE_MR,
-    SE_MB,
-    SE_NK,
-    SE_NT,
-    SE_NN,
-    SE_NS,
-    SE_NM,
-    SE_NR,
-    SE_NB,
-    SE_YK,
-    SE_YT,
-    SE_YS,
-    SE_YR,
-    SE_YB,
-
+    DN_NN,
     
     //mark codes
     DM_BRCT,
@@ -112,8 +61,7 @@ enum custom_keycodes {
     
     //layer change codes
     D_ETOJ,
-    D_JTOE,
-    OS_EK
+    D_JTOE
 };
 
 
@@ -135,9 +83,6 @@ enum custom_keycodes {
 #define _FUNCJ 10
 #define _SFUNCJ 11
 
-#define _JPSpExt 12
-#define _JPSpExtK 13
-
 //layer change
 #define KC_TOE TO(0)
 #define KC_SEN LT(1,KC_SPC)
@@ -152,8 +97,6 @@ enum custom_keycodes {
 #define KC_NUMJ TT(9)
 #define KC_FNCJ TT(10)
 #define KC_SFJ MO(11)
-
-#define KC_EK OS_EK
 
 //IME change
 #define KC_JTOE D_JTOE
@@ -188,6 +131,7 @@ enum custom_keycodes {
 //DN_WO
 #define KC_DWO DN_WO
 #define KC_DTSU DN_TSU
+#define KC_DNN DN_NN
 
 //special extension
 #define KC_SKK SE_KK
@@ -368,9 +312,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,RSFT,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, Y  , S  , T  , EK , N                 , U  , A  , O  , I  , E  ,MINS,
+     LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LGUI, B  , L  ,DTSU, DWO, DEL,JTOE     , NO ,BSPC, DAU, DOI, DII, DEA,ENT ,
+     LGUI, B  , L  , DNN,DWO, DEL,JTOE     , NO ,BSPC, DAU, DOI, DII, DEA,ENT ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
                        LCTL,FNCJ, SJP         ,ENT ,MRKJ,LALT
   //                  `----+----+----'        `----+----+----'
@@ -385,7 +329,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
      ___ , B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,SLSH,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___ ,___ , C  , ___, ___, ___,CHIME    ,CHIME,___, DAE, DOA, DIA, DIO,___ ,
+     ___ ,___ , C  ,DTSU, ___, ___,CHIME    ,CHIME,___, DAE, DOA, DIA, DIO,___ ,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
                        ___ ,FNCJ, SJP         ,___ ,NUMJ,___
   //                  `----+----+----'        `----+----+----'
@@ -449,36 +393,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
                                                   KC____    , KC_TOJ    , KC_NO          , KC____   , KC_SFJ    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
-  ),
-
-    //Japanese special extension keymap for trans
-    [_JPSpExt] = LAYOUT_kc(
-  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,RSFT,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
-  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LGUI, B  , L  , X  , DWO, DEL,JTOE     , NO ,BSPC, DAU, DOI, DII, DEA,ENT ,
-  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL,FNCJ, SJP         ,ENT ,MRKJ,LALT
-  //                  `----+----+----'        `----+----+----'
-  ),
-  
-    //Japanese special extension keymap for "K"
-    [_JPSpExtK] = LAYOUT_kc(
-  //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ___ , ___, ___, ___, ___, ___               , ___, ___, ___, ___, ___, ___,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ , ___, ___, SKR, SKM, ___               , ___, ___, ___, ___, ___,___ ,
-  //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ , ___, SKS, SKT, SKK, SKN               , ___, ___, ___, ___, ___, ___,
-  //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___ , SKB, ___, ___, ___, ___,CHIME    ,CHIME,___, ___, ___, ___, ___,___ ,
-  //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       ___ ,FNCJ, SJP         ,___ ,NUMJ,___
-  //                  `----+----+----'        `----+----+----'
   ),
 
 };
@@ -648,336 +562,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    //macros for Japanese special extension
-    case SE_KK:
+    case DN_NN:
       if (record->event.pressed) {
-        // when keycode SE_KK is pressed
-        SEND_STRING("oko");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+        // when keycode DN_NN is pressed
+        SEND_STRING("nn");
       }
       return false;
       break;
-    case SE_KT:
-      if (record->event.pressed) {
-        // when keycode SE_KT is pressed
-        SEND_STRING("oto");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-      }
-      return false;
-      break;
-    case SE_KN:
-      if (record->event.pressed) {
-        // when keycode SE_KN is pressed
-        SEND_STRING("ono");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-      }
-      return false;
-      break;
-    case SE_KS:
-      if (record->event.pressed) {
-        // when keycode SE_KS is pressed
-        SEND_STRING("oso");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-      }
-      return false;
-      break;
-    case SE_KM:
-      if (record->event.pressed) {
-        // when keycode SE_KM is pressed
-        SEND_STRING("amo");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-      }
-      return false;
-      break;
-    case SE_KR:
-      if (record->event.pressed) {
-        // when keycode SE_KR is pressed
-        SEND_STRING("ara");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-      }
-      return false;
-      break;
-    case SE_KB:
-      if (record->event.pressed) {
-        // when keycode SE_KB is pressed
-        SEND_STRING("eba");
-        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-      }
-      return false;
-      break;
-    case SE_SK:
-      if (record->event.pressed) {
-        // when keycode SE_SK is pressed
-        SEND_STRING("oko");
-      }
-      return false;
-      break;
-    case SE_ST:
-      if (record->event.pressed) {
-        // when keycode SE_ST is pressed
-        SEND_STRING("oto");
-      }
-      return false;
-      break;
-    case SE_SN:
-      if (record->event.pressed) {
-        // when keycode SE_SN is pressed
-        SEND_STRING("ono");
-      }
-      return false;
-      break;
-    case SE_SS:
-      if (record->event.pressed) {
-        // when keycode SE_SS is pressed
-        SEND_STRING("ase");
-      }
-      return false;
-      break;
-    case SE_SM:
-      if (record->event.pressed) {
-        // when keycode SE_SM is pressed
-        SEND_STRING("imo");
-      }
-      return false;
-      break;
-    case SE_SR:
-      if (record->event.pressed) {
-        // when keycode SE_SR is pressed
-        SEND_STRING("uru");
-      }
-      return false;
-      break;
-    case SE_SB:
-      if (record->event.pressed) {
-        // when keycode SE_SB is pressed
-        SEND_STRING("eba");
-      }
-      return false;
-      break;
-    case SE_TK:
-      if (record->event.pressed) {
-        // when keycode SE_TK is pressed
-        SEND_STRING(SS_LSFT(SS_LCTRL("doko")));
-      }
-      return false;
-      break;
-    case SE_TT:
-      if (record->event.pressed) {
-        // when keycode SE_TT is pressed
-        SEND_STRING(SS_LSFT(SS_LCTRL("dato")));
-      }
-      return false;
-      break;
-    case SE_TN:
-      if (record->event.pressed) {
-        // when keycode SE_TN is pressed
-        SEND_STRING(SS_LSFT(SS_LCTRL("dono")));
-      }
-      return false;
-      break;
-    case SE_TS:
-      if (record->event.pressed) {
-        // when keycode SE_TS is pressed
-        SEND_STRING(SS_LSFT(SS_LCTRL("desu")));
-      }
-      return false;
-      break;
-    case SE_TM:
-      if (record->event.pressed) {
-        // when keycode SE_TM is pressed
-        SEND_STRING(SS_LSFT(SS_LCTRL("demo")));
-      }
-      return false;
-      break;
-    case SE_TR:
-      if (record->event.pressed) {
-        // when keycode SE_TR is pressed
-        SEND_STRING(SS_LSFT(SS_LCTRL("dore")));
-      }
-      return false;
-      break;
-    case SE_TB:
-      if (record->event.pressed) {
-        // when keycode SE_TB is pressed
-        SEND_STRING("eba");
-      }
-      return false;
-      break;
-    case SE_HK:
-      if (record->event.pressed) {
-        // when keycode SE_HK is pressed
-        SEND_STRING("oka");
-      }
-      return false;
-      break;
-    case SE_HT:
-      if (record->event.pressed) {
-        // when keycode SE_HT is pressed
-        SEND_STRING("ito");
-      }
-      return false;
-      break;
-    case SE_HN:
-      if (record->event.pressed) {
-        // when keycode SE_HN is pressed
-        SEND_STRING("eno");
-      }
-      return false;
-      break;
-    case SE_HS:
-      if (record->event.pressed) {
-        // when keycode SE_HS is pressed
-        SEND_STRING("azu");
-      }
-      return false;
-      break;
-    case SE_HM:
-      if (record->event.pressed) {
-        // when keycode SE_HM is pressed
-        SEND_STRING("emo");
-      }
-      return false;
-      break;
-    case SE_HR:
-      if (record->event.pressed) {
-        // when keycode SE_HR is pressed
-        SEND_STRING("ora");
-      }
-      return false;
-      break;
-    case SE_HB:
-      if (record->event.pressed) {
-        // when keycode SE_HB is pressed
-        SEND_STRING("eba");
-      }
-      return false;
-      break;
-    case SE_MK:
-      if (record->event.pressed) {
-        // when keycode SE_MK is pressed
-        SEND_STRING("eku");
-      }
-      return false;
-      break;
-    case SE_MT:
-      if (record->event.pressed) {
-        // when keycode SE_MT is pressed
-        SEND_STRING("ata");
-      }
-      return false;
-      break;
-    case SE_MN:
-      if (record->event.pressed) {
-        // when keycode SE_MN is pressed
-        SEND_STRING("ono");
-      }
-      return false;
-      break;
-    case SE_MS:
-      if (record->event.pressed) {
-        // when keycode SE_MS is pressed
-        SEND_STRING("asu");
-      }
-      return false;
-      break;
-    case SE_MM:
-      if (record->event.pressed) {
-        // when keycode SE_MM is pressed
-        SEND_STRING("emo");
-      }
-      return false;
-      break;
-    case SE_MR:
-      if (record->event.pressed) {
-        // when keycode SE_MR is pressed
-        SEND_STRING("uri");
-      }
-      return false;
-      break;
-    case SE_MB:
-      if (record->event.pressed) {
-        // when keycode SE_MB is pressed
-        SEND_STRING("eba");
-      }
-      return false;
-      break;
-    case SE_NK:
-      if (record->event.pressed) {
-        // when keycode SE_NK is pressed
-        SEND_STRING("aka");
-      }
-      return false;
-      break;
-    case SE_NT:
-      if (record->event.pressed) {
-        // when keycode SE_NT is pressed
-        SEND_STRING("annto");
-      }
-      return false;
-      break;
-    case SE_NN:
-      if (record->event.pressed) {
-        // when keycode SE_NN is pressed
-        SEND_STRING("ani");
-      }
-      return false;
-      break;
-    case SE_NS:
-      if (record->event.pressed) {
-        // when keycode SE_NS is pressed
-        SEND_STRING("aze");
-      }
-      return false;
-      break;
-    case SE_NM:
-      if (record->event.pressed) {
-        // when keycode SE_NM is pressed
-        SEND_STRING("imo");
-      }
-      return false;
-      break;
-    case SE_NR:
-      if (record->event.pressed) {
-        // when keycode SE_NR is pressed
-        SEND_STRING("aru");
-      }
-      return false;
-      break;
-    case SE_NB:
-      if (record->event.pressed) {
-        // when keycode SE_NB is pressed
-        SEND_STRING("eba");
-      }
-      return false;
-      break;
-    case SE_YK:
-      if (record->event.pressed) {
-        // when keycode SE_YK is pressed
-        SEND_STRING("oku");
-      }
-      return false;
-      break;
-    case SE_YT:
-      if (record->event.pressed) {
-        // when keycode SE_YT is pressed
-        SEND_STRING("tte");
-      }
-      return false;
-      break;
-    case SE_YS:
-      if (record->event.pressed) {
-        // when keycode SE_YS is pressed
-        SEND_STRING("osi");
-      }
-      return false;
-      break;
-    case SE_YR:
-      if (record->event.pressed) {
-        // when keycode SE_YR is pressed
-        SEND_STRING("ori");
-      }
-      return false;
-      break;      
     //macros for marks
     case DM_BRCT:
       if (record->event.pressed) {
@@ -1032,17 +623,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_clear();
         layer_on(6);
       }
-      return false;
-      break;
-    case OS_EK:
-      if (record->event.pressed) {
-        // when keycode D_ETOJ is pressed
-        SEND_STRING("k");
-        set_oneshot_layer(13, ONESHOT_START);
-      } else {
-        set_oneshot_layer(13, ONESHOT_PRESSED);
-      }
-
       return false;
       break;
   }
