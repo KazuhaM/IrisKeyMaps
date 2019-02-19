@@ -9,14 +9,12 @@ enum {
     SMDVORAK,
     MSKYTOUCH,
     SMSKYTOUCH,
-    MARKE,
-    MARKJ,
-    NMALE, //
-    NMALJ,
-    FUNCE,
-    SFUNCE,
-    FUNCJ,
-    SFUNCJ
+    MARK,
+    NUM, //
+    FUNC,
+    SFUNC,
+
+    TD_LANGN
 };
 
 //define macro
@@ -57,14 +55,20 @@ enum custom_keycodes {
     DM_BRCTM,
     DM_SSTT,
 
+    //IME
+    IM_EN,
+    IM_JP,
+
     //function code
     DF_RNMSH,
+    DF_WOXSET,
+    DF_WOXML,
+    DF_WOXGMSC,
+    DF_WOXPASS,
     
     //layer change codes
-    D_ETOJ,
-    D_JTOE
+    CL_NTM
 };
-
 
 //keycode shorthands
 #define KC____  KC_TRNS // three underscores "NO" for transparent
@@ -72,37 +76,30 @@ enum custom_keycodes {
 //layer shorthands
 #define _MDVORAK 0
 #define _SMDVORAK 1
-#define _MARKE 2
-#define _NMALE 3
-#define _FUNCE 4
-#define _SFUNCE 5
+#define _MSKYTOUCH 2
+#define _SMSKYTOUCH 3
+#define _MARK 4
+#define _NUM 5
+#define _FUNC 6
+#define _SFUNC 7
 
-#define _MSKYTOUCH 6
-#define _SMSKYTOUCH 7
-#define _MARKJ 8
-#define _NMALJ 9
-#define _FUNCJ 10
-#define _SFUNCJ 11
+
 
 //layer change
-#define KC_TOE TO(0)
 #define KC_SEN LT(1,KC_SPC)
-#define KC_MRKE TT(2)
-#define KC_NUME TT(3)
-#define KC_FNCE TT(4)
-#define KC_SFE MO(5)
+#define KC_SJP LT(3,KC_SPC)
+#define KC_MRK TT(4)
+#define KC_NUM TT(5)
+#define KC_FNC MO(6)
+#define KC_SF MO(7)
+#define KC_NTM CL_NTM
 
-#define KC_TOJ TO(6)
-#define KC_SJP LT(7,KC_SPC)
-#define KC_MRKJ TT(8)
-#define KC_NUMJ TT(9)
-#define KC_FNCJ TT(10)
-#define KC_SFJ MO(11)
 
 //IME change
-#define KC_JTOE D_JTOE
-#define KC_ETOJ D_ETOJ
 #define KC_CHIME LALT(KC_GRAVE)
+#define KC_LANN TD(TD_LANGN)
+#define KC_IEN IM_EN
+#define KC_IJP IM_JP
 
 //diphthong
 #define KC_DUU DI_UU
@@ -191,6 +188,10 @@ enum custom_keycodes {
 
 //function
 #define KC_DRNSH DF_RNMSH
+#define KC_WOXS DF_WOXSET
+#define KC_WOXM DF_WOXML
+#define KC_WOXG DF_WOXGMSC
+#define KC_WOXP DF_WOXPASS
 
 //macros for numpad
 #define KC_NP0 M(0)
@@ -218,171 +219,111 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, M  , R  , P  , Y                 , F  , G  , C  , DOT, L  ,RSFT,
+     TAB , X  , Y  , O  , U  , Q                 , W  , D  , L  , N  , V  ,LALT,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, A  , O  , E  , U  , I                 , J  , H  , T  , N  , S  , D  ,
+     LGUI, H  , I  , E  , A  , DOT               , G  , S  , T  , R  , P  , F  ,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LGUI, B  ,QUOT, X  , K  , DEL, NO      ,ETOJ,BSPC, V  , Z  , Q  ,W   ,ENT ,
+     LSFT,COMM,QUOT, J  , Z  , DEL, IEN     , IJP,BSPC, C  , M  , B  , K  , ENT,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL,FNCE, SEN         ,ENT ,MRKE ,LALT
+                       LCTL, FNC, SEN         ,ENT ,MRK , NUM
   //                  `----+----+----'        `----+----+----'
   ),
 
   //shifted English keymap
     [_SMDVORAK] = LAYOUT(
   //,-------+--------+--------+--------+--------+--------.                      ,---------+---------+---------+---------+---------+--------.
-     KC____ , KC____ , KC____ , KC____ , KC____ , KC____                        , KC____  , KC____  , KC____  , KC____  , KC____  , KC____ ,
+     KC____ , KC____ , KC____ , KC____ , KC____ , KC____                        , KC____  , KC____  , KC____  , KC____  , KC_F23  , KC_F24 ,
   //|-------+--------+--------+--------+--------+--------|                      |---------+---------+---------+---------+---------+--------|
-     KC____ , KC_SCLN, S(KC_M), S(KC_R), S(KC_P), S(KC_Y)                       , S(KC_F) , S(KC_G) , S(KC_C) , KC_COLN , S(KC_L) , KC____ ,
+     KC____ , S(KC_X), S(KC_Y), S(KC_O), S(KC_U), S(KC_Q)                       , S(KC_W) , S(KC_D) , S(KC_L) , S(KC_N) , S(KC_V) , KC____ ,
   //|-------+--------+--------+--------+--------+--------|                      |---------+---------+---------+---------+---------+--------|
-     KC____ , S(KC_A), S(KC_O), S(KC_E), S(KC_U), S(KC_I)                       , S(KC_J) , S(KC_H) , S(KC_T) , S(KC_N) , S(KC_S) , S(KC_D),
+     KC____ , S(KC_H), S(KC_I), S(KC_E), S(KC_A), KC_COLN                       , S(KC_G) , S(KC_S) , S(KC_T) , S(KC_R) , S(KC_P) , S(KC_F),
   //|-------+--------+--------+--------+--------+--------+--------.    ,--------|---------+---------+---------+---------+---------+--------|
-     KC____ , S(KC_B), KC_DQT , S(KC_X), S(KC_K), KC____ ,KC_CHIME     ,KC_CHIME, KC____  , S(KC_V) , S(KC_Z) , S(KC_Q) , S(KC_W) , KC____ ,
+     KC____ , KC_SCLN, KC_DQT , S(KC_J), S(KC_Z), KC____ , KC_LANN    ,KC_CHIME , KC____  , S(KC_C) , S(KC_M) , S(KC_B) , S(KC_K) , KC____ ,
   //`-------+--------+--------+--------+--------+--------+--------/    \--------+---------+---------+---------+---------+---------+--------'
-                                         KC____ , KC_FNCE, KC_SEN      , KC____ , KC_NUME , KC____
+                                         KC____ , KC_FNC , KC_SEN      , KC____ , KC____  , KC____
   //                                    `-------+--------+--------'    `--------+---------+--------'
   ),
-  
-
-  //mark (symbol) keymap for english (IME: off)
-    [_MARKE] = LAYOUT(
-  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC_COLN   , KC_SCLN   , KC____    , KC____    , KC____    ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC_QUOT   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC____    ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC_DQT	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
-  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC____    , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_TOE         , KC_ETOJ  , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
-  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC____    , KC_FNCE    , KC_NO          , KC____   , KC_TOE    , KC____
-  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
-  ),
-
-  //number and allows keymap for english (IME: off)
-    [_NMALE] = LAYOUT_kc(
-  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ___    , ___       , ___       , SCLN      , COLN      , ___                                   , BSLS      , CIRC      , NPSLS     , NPAST     , COMM      , NLCK      ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , DLR       , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
-  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , ___       , PGUP      , SPC       , PGDN      , DEL	      , TOE            , ETOJ     , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
-  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  ___       , FNCE      , TOE            , NP0      , MRKE      , ___
-  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
-  ),
-
-  //function keymap for english (IME: off)
-    [_FUNCE] = LAYOUT(
-  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC____ , KC_F1     , KC____    , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , A(KC_G)   , A(KC_S)   , LCA(KC_DEL),
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_Y)   , G(KC_R)   , KC_D      , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
-  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC_TOE         , KC_ETOJ  , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
-  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC____    , KC_TOE    , KC_NO          , KC_ENT   , KC_SFE    , KC____
-  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
-  ),
-
-  //shifted function keymap for english (IME: off)
-    [_SFUNCE] = LAYOUT(
-  //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(S(KC_Z)), KC____    , KC____    , C(KC_H)   , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
-  //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
-  //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____	  , KC_TOE         , KC_ETOJ  , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
-  //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC____    , KC_TOE    , KC_NO          , KC____   , KC_SFE    , KC____
-  //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
-  ),
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   //Japanese base keymap based on sky touch
     [_MSKYTOUCH] = LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
      ESC , F2 , F3 , F4 , F5 , F6                , F7 , F8 , F9 , F10, F11, F12,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     TAB ,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI,RSFT,
+      ___,COMM, H  , R  , M  , W                 , DUU, DAI, DOU, DOT, DEI, ___,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     LSFT, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
+      ___, Y  , S  , T  , K  , N                 , U  , A  , O  , I  , E  ,MINS,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     LGUI, B  , L  , DNN,DWO, DEL,JTOE     , NO ,BSPC, DAU, DOI, DII, DEA,ENT ,
+      ___, P  , L  ,DTSU, DWO, DEL, IEN     , IJP,BSPC, DAU, DOI, DII, DEA, ___,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL,FNCJ, SJP         ,ENT ,MRKJ,LALT
+                        ___, FNC, SJP         , ___, NUM, MRK
   //                  `----+----+----'        `----+----+----'
   ),
   
   //shifted Japanese keymap
     [_SMSKYTOUCH] = LAYOUT_kc(
   //,----+----+----+----+----+----.              ,----+----+----+----+----+----.
-     ___ , ___, ___, ___, ___, ___               , ___, ___, ___, ___, ___, ___,
+     ___ , ___, ___, ___, ___, ___               , ___, ___, ___, ___, F23, F24,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ ,SCLN, V  , J  , F  , Q                 , DUI, DAA, DOO,COLN, DIU,___ ,
+     ___ ,SCLN, ___, J  , F  , Q                 , DUI, DAA, DOO,COLN, DIU, ___,
   //|----+----+----+----+----+----|              |----+----+----+----+----+----|
-     ___ , B  , Z  , D  , G  , P                 ,DUNN,DANN,DONN,DINN,DENN,SLSH,
+     ___ , ___, Z  , D  , G  , DNN               ,DUNN,DANN,DONN,DINN,DENN,SLSH,
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
-     ___ ,___ , C  ,DTSU, ___, ___,CHIME    ,CHIME,___, DAE, DOA, DIA, DIO,___ ,
+     ___ , B  , V  , C  , X  , ___,LANN    ,CHIME,___ , DAE, DOA, DIA, DIO, ___,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       ___ ,FNCJ, SJP         ,___ ,NUMJ,___
+                       ___ , FNC, SJP         ,___ , ___,___
   //                  `----+----+----'        `----+----+----'
   ),
 
-  //mark (symbol) keymap for Japanese (IME: on)
-    [_MARKJ] = LAYOUT(
+  
+  
+
+  //mark (symbol) keymap for english (IME: off)
+    [_MARK] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC_COLN   , KC_SCLN   , KC____    , KC____    , KC____    ,
+     KC____ , KC_BSLS   , KC_SLSH   , KC_UNDS   , KC_MINS   , KC_EXLM                               , KC_BSLS   , KC_CIRC   , KC_SCLN   , KC_ASTR   , KC_SCLN   , KC_COLN  ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC_QUOT   , KC_LCBR   , KC_LBRC   , KC_LPRN   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_CIRC   , KC_MINS   , KC____    ,
+     KC____ , KC_GT     , KC_LT     , KC_LBRC   , KC_RBRC   , KC_AMPR                               , KC_EQL    , KC_EXLM   , KC_BSLS   , KC_PERC   , KC_MINS   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC_DQT 	  , KC_DBRCTM , KC_DBRCTL , KC_DBRCT  , KC_LT                                 , KC_SSTT   , KC_QUES   , KC_AT     , KC_TILD   , KC_UNDS   , KC_PIPE   ,
+     KC____ , KC_QUOT	  , KC_DQT    , KC_LPRN   , KC_RPRN   , KC_DLR                                , KC_SSTT   , KC_QUES   , KC_AT     , KC_UNDS   , KC_PLUS   , KC_PIPE   ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC____    , KC_LCBR   , KC_RBRC   , KC_RPRN   , KC_GT	    , KC_JTOE        ,KC_TOJ    , KC_GRV    , KC_DLR    , KC_HASH   , KC_PERC   , KC_SLSH   , KC____    ,
+     KC____ , KC_COMM   , KC_GRV    , KC_LCBR   , KC_RCBR   , KC____    , KC____         , KC____   , KC_GRV    , KC_TILD   , KC_HASH   , KC_SLSH   , KC_DOT    , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                   KC____   , KC_FNCJ   , KC_NO          ,KC____    , KC_TOJ    , KC____
+                                                  KC____    , KC____    , KC_SPC         , KC____   , KC____    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
-  //number and allows keymap for Japanese (IME: on)
-    [_NMALJ] = LAYOUT_kc(
+  //number and allows keymap for english (IME: off)
+    [_NUM] = LAYOUT_kc(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ___    , ___       , ___       , SCLN      , COLN      , ___                                   , BSLS      , CIRC      , NPSLS     , NPAST     , COMM      , NLCK      ,
+     ___    , COLN      , ___       , ___       , ___       , ___                                   , BSLS      , CIRC      , NPSLS     , NPAST     , COMM      , CALC      ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , DLR       , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
+     ___    , LPRN      , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , LPRN  	  , LEFT      , DOWN      , RGHT      , RPRN                                  , NP0       , NP4       , NP5       , NP6       , NPPLS     , CALC      ,
+     ___    , RPRN  	  , LEFT      , DOWN      , RGHT      , DLR                                   , NP0       , NP4       , NP5       , NP6       , NPPLS     , NO        ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , ___       , PGUP      , SPC       , PGDN      , DEL	      , JTOE           , TOJ      , BSPC      , NP1       , NP2       , NP3       , NPDOT     , ___       ,
+     ___    , SCLN      , PGUP      , NO        , PGDN      , ___	      , ___            , ___      , ___       , NP1       , NP2       , NP3       , NPDOT     , ___       ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  ___       , FNCJ      , TOJ            , NP0      , MRKJ       , ___
+                                                  ___       , ___       , ___            , ___      , NP0       , NTM
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
-  //function keymap for Japanese (IME: on)
-    [_FUNCJ] = LAYOUT(
+  //function keymap for english (IME: off)
+    [_FUNC] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     KC____ , KC_F1     , KC_NO     , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , A(KC_G)   , A(KC_S)   , LCA(KC_DEL),
+     KC____ , KC_F1     , KC_NO     , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , KC_WOXG   , KC_WOXS   ,LCA(KC_DEL),
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_Y)   , G(KC_R)   , KC_D      , C(KC_F)   , KC_DRNSH                              , A(KC_M)   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
+     KC____ , C(KC_Y)   , G(KC_R)   , KC_D      , C(KC_F)   , KC_DRNSH                              , KC_WOXM   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , A(KC_H)                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
+     KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , KC_WOXP                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC_JTOE        , KC_TOJ   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
+     KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC____         , KC____   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC____    , KC_TOJ    , KC_NO          , KC_ENT   , KC_SFJ    , KC____
+                                                  KC____    , KC____    , KC_NO          , KC_LCTL  , KC_SF     , KC_NO 
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
-  //shifted function keymap for Japanese (IME: on)
-    [_SFUNCJ] = LAYOUT(
+  //shifted function keymap for english (IME: off)
+    [_SFUNC] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
      KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
@@ -390,12 +331,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC____    , KC____    , KC____    , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____	  , KC_JTOE        , KC_TOJ   , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
+     KC____ , KC____    , KC____    , KC____    , KC____    , KC____	  , KC____         , KC____   , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC____    , KC_TOJ    , KC_NO          , KC____   , KC_SFJ    , KC____
+                                                  KC____    , KC____    , KC_NO          , KC____   , KC_SF     , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
+};
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+// control IME
+void dance_langnime_finished (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    register_code (KC_F23);
+  } else {
+    register_code (KC_F24);
+  }
+}
+
+void dance_langnime_reset (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    unregister_code (KC_F23);
+  } else {
+    unregister_code (KC_F24);
+  }
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [TD_LANGN]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, dance_langnime_finished, dance_langnime_reset,500)
 };
 
 //macro
@@ -571,6 +534,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
     //macros for marks
+    ///////////////////////////////////////////////// (not use)
     case DM_BRCT:
       if (record->event.pressed) {
         // when keycode DM_BRCT is pressed
@@ -592,6 +556,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    //////////////////////////////////////////////////
     case DM_SSTT:
       if (record->event.pressed) {
         // when keycode DM_SSTT is pressed
@@ -607,22 +572,69 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-  //macros for layer change
-    case D_JTOE:
+    case DF_WOXSET:
       if (record->event.pressed) {
-        // when keycode D_JTOE is pressed
-        SEND_STRING(SS_LALT(SS_TAP(X_GRAVE)));
+        // when keycode DF_WOXSET is pressed
+        SEND_STRING(SS_LALT("s"));
+      }else{
+        SEND_STRING(SS_TAP(X_ENTER));
+      }
+      return false;
+      break;
+    case DF_WOXML:
+      if (record->event.pressed) {
+        // when keycode DF_WOXMLis pressed
+        SEND_STRING(SS_LALT("m"));
+      }else{
+        SEND_STRING(SS_TAP(X_ENTER));
+      }
+      return false;
+      break;
+    case DF_WOXGMSC:
+      if (record->event.pressed) {
+        // when keycode DF_WOXGMSC is pressed
+        SEND_STRING(SS_LALT("g"));
+      }else{
+        SEND_STRING(SS_TAP(X_ENTER));
+      }
+      return false;
+      break;
+    case DF_WOXPASS:
+      if (record->event.pressed) {
+        // when keycode DF_WOXPASS is pressed
+        SEND_STRING(SS_LALT("p"));
+      }else{
+        SEND_STRING(SS_TAP(X_ENTER));
+      }
+      return false;
+      break;
+  //macros for layer
+    case IM_EN:
+      if (record->event.pressed) {
+        // when keycode IM_EN is pressed
+        SEND_STRING(SS_TAP(X_F23));        
         layer_clear();
         layer_on(0);
       }
       return false;
       break;
-    case D_ETOJ:
+    case IM_JP:
       if (record->event.pressed) {
-        // when keycode D_ETOJ is pressed
-        SEND_STRING(SS_LALT(SS_TAP(X_GRAVE)));
+        // when keycode IM_JP is pressed
+        SEND_STRING(SS_TAP(X_F24));
         layer_clear();
-        layer_on(6);
+        layer_on(2);
+      }
+      return false;
+      break;
+    case CL_NTM:
+      if (record->event.pressed) {
+        // when keycode DF_RNMSH is pressed
+        layer_off(5);
+        layer_on(4);
+      }else{
+        layer_off(4);
+        layer_on(5);
       }
       return false;
       break;
