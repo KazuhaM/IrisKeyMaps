@@ -225,7 +225,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
      LSFT,COMM,QUOT, J  , Z  , DEL, IEN     , IJP,BSPC, C  , M  , B  , K  , ENT,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       LCTL, FNC, SEN         ,ENT ,MRK , NUM
+                       LCTL, FNC, SEN         ,ENT , NUM, MRK
   //                  `----+----+----'        `----+----+----'
   ),
 
