@@ -131,55 +131,6 @@ enum custom_keycodes {
 #define KC_DTSU DN_TSU
 #define KC_DNN DN_NN
 
-//special extension
-#define KC_SKK SE_KK
-#define KC_SKT SE_KT
-#define KC_SKN SE_KN
-#define KC_SKS SE_KS
-#define KC_SKM SE_KM
-#define KC_SKR SE_KR
-#define KC_SKB SE_KB
-#define KC_SSK SE_SK
-#define KC_SST SE_ST
-#define KC_SSN SE_SN
-#define KC_SSS SE_SS
-#define KC_SSM SE_SM
-#define KC_SSR SE_SR
-#define KC_SSB SE_SB
-#define KC_STK SE_TK
-#define KC_STT SE_TT
-#define KC_STN SE_TN
-#define KC_STS SE_TS
-#define KC_STM SE_TM
-#define KC_STR SE_TR
-#define KC_STB SE_TB
-#define KC_SHK SE_HK
-#define KC_SHT SE_HT
-#define KC_SHN SE_HN
-#define KC_SHS SE_HS
-#define KC_HMS SE_HM
-#define KC_SHR SE_HR
-#define KC_SHB SE_HB
-#define KC_SMK SE_MK
-#define KC_SMT SE_MT
-#define KC_SMN SE_MN
-#define KC_SMS SE_MS
-#define KC_SMM SE_MM
-#define KC_SMR SE_MR
-#define KC_SMB SE_MB
-#define KC_SNK SE_NK
-#define KC_SNT SE_NT
-#define KC_SNN SE_NN
-#define KC_SNS SE_NS
-#define KC_SNM SE_NM
-#define KC_SNR SE_NR
-#define KC_SNB SE_NB
-#define KC_SYK SE_YK
-#define KC_SYT SE_YT
-#define KC_SYS SE_YS
-#define KC_SYR SE_YR
-#define KC_SYB SE_YB
-
 //mark
 #define KC_DBRCT DM_BRCT
 #define KC_DBRCTL DM_BRCTL
@@ -310,7 +261,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //function keymap for english (IME: off)
     [_FUNC] = LAYOUT(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-  LCA(KC_DEL), KC_F1    , KC_NO     , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , KC_WOXG   , KC_WOXS   ,LCA(KC_DEL),
+  LCA(KC_DEL), KC_F1    , KC_CAPS   , KC_INS    , KC_PSCR   , KC_NLCK                               , KC_MUTE   , KC_VOLD   , KC_VOLU   , KC_WOXG   , KC_WOXS   ,LCA(KC_DEL),
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , C(KC_Y)   , G(KC_R)   , C(KC_R)   , C(KC_F)   , KC_DRNSH                              , KC_WOXM   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|

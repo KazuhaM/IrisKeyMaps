@@ -39,8 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_VAL_STEP 8
 */
 #define PERMISSIVE_HOLD
-#define TAPPING_TERM 150
-#define TAPPING_TOGGLE 2
+#define TAPPING_TERM 145
+#define TAPPING_TOGGLE 3
 #include "../../config.h"
 
 
