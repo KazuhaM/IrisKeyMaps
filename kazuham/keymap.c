@@ -90,7 +90,7 @@ enum custom_keycodes {
 #define KC_SJP LT(3,KC_SPC)
 #define KC_MRK TT(4)
 #define KC_NUM TT(5)
-#define KC_FNC MO(6)
+#define KC_FNC MO(6) //altキーをタップダンスで
 #define KC_SF MO(7)
 #define KC_NTM CL_NTM
 
