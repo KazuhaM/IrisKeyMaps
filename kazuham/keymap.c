@@ -1,5 +1,10 @@
-#include "action_layer.h"
 #include QMK_KEYBOARD_H
+#include "action_layer.h"
+#include "bootloader.h"
+#ifdef PROTOCOL_LUFA
+  #include "lufa.h"
+  #include "split_util.h"
+#endif
 
 extern keymap_config_t keymap_config;
 
@@ -68,7 +73,8 @@ enum custom_keycodes {
     
     //layer change codes
     CL_NTM,
-    DF_PST
+    DF_PST,
+    DF_CTR2     
 };
 
 //keycode shorthands
@@ -145,23 +151,23 @@ enum custom_keycodes {
 #define KC_WOXG DF_WOXGMSC
 #define KC_WOXP DF_WOXPASS
 
-//macros for numpad
-#define KC_NP0 M(0)
-#define KC_NP1 M(1)
-#define KC_NP2 M(2)
-#define KC_NP3 M(3)
-#define KC_NP4 M(4)
-#define KC_NP5 M(5)
-#define KC_NP6 M(6)
-#define KC_NP7 M(7)
-#define KC_NP8 M(8)
-#define KC_NP9 M(9)
-#define KC_NPDOT M(10)
-#define KC_NPEQL M(11)
-#define KC_NPPLS M(12)
-#define KC_NPMNS M(13)
-#define KC_NPAST M(14)
-#define KC_NPSLS M(15)
+// //macros for numpad
+// #define KC_NP0 M(0)
+// #define KC_NP1 M(1)
+// #define KC_NP2 M(2)
+// #define KC_NP3 M(3)
+// #define KC_NP4 M(4)
+// #define KC_NP5 M(5)
+// #define KC_NP6 M(6)
+// #define KC_NP7 M(7)
+// #define KC_NP8 M(8)
+// #define KC_NP9 M(9)
+// #define KC_NPDOT M(10)
+// #define KC_NPEQL M(11)
+// #define KC_NPPLS M(12)
+// #define KC_NPMNS M(13)
+// #define KC_NPAST M(14)
+// #define KC_NPSLS M(15)
 
 //keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -192,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------+--------+--------.    ,--------|---------+---------+---------+---------+---------+--------|
      KC____ , KC_SCLN, KC_DQT , S(KC_J), S(KC_Z), KC____ , KC_LANN    ,KC_CHIME , KC____  , S(KC_C) , S(KC_M) , S(KC_B) , S(KC_K) , KC____ ,
   //`-------+--------+--------+--------+--------+--------+--------/    \--------+---------+---------+---------+---------+---------+--------'
-                                         KC____ , KC_FNC , KC_SEN      , KC____ , KC____  , KC____
+                                         KC____ , KC_LALT, KC_SEN      , KC____ , KC____  , KC____
   //                                    `-------+--------+--------'    `--------+---------+--------'
   ),
 
@@ -222,7 +228,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|----+----+----+----+----+----+----.    ,----|----+----+----+----+----+----|
      ___ , B  , V  , P  , B  , ___,LANN    ,CHIME,___ , DAE, DOA, DIA, DIO, ___,
   //`----+----+----+----+----+----+----/    \----+----+----+----+----+----+----'
-                       ___ , FNC, SJP         ,___ , ___,___
+                       ___ , LALT, SJP         ,___ , ___,___
   //                  `----+----+----'        `----+----+----'
   ),
 
@@ -240,22 +246,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC_COMM   , KC_GRV    , KC_LCBR   , KC_RCBR   , KC____    , KC____         , KC____   , KC____    , KC_TILD   , KC_HASH   , KC_SLSH   , KC_DOT    , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC____    , KC____    , KC_SPC         , KC____   , KC____    , KC____
+                                                  KC____    , KC_FNC    , KC_SPC         , KC____   , KC____    , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
   //number and allows keymap for english (IME: off)
     [_NUM] = LAYOUT_kc(
   //,-------+-----------+-----------+-----------+-----------+-----------.                           ,-----------+-----------+-----------+-----------+-----------+-----------.
-     ___    , ___       , ___       , ___       , ___       , ___                                   , BSLS      , CIRC      , NPSLS     , NPAST     , SCLN      , CALC      ,
+     ___    , ___       , ___       , ___       , ___       , ___                                   , BSLS      , CIRC      ,  PSLS     ,  PAST     , SCLN      , CALC      ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , LPRN      , HOME      , UP        , END       , AMPR                                  , EQL       , NP7       , NP8       , NP9       , NPMNS     , ___       ,
+     ___    , LPRN      , HOME      , UP        , END       , AMPR                                  , EQL       ,  P7       ,  P8       ,  P9       ,  PMNS     , ___       ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , RPRN  	  , LEFT      , DOWN      , RGHT      , DLR                                   , NP0       , NP4       , NP5       , NP6       , NPPLS     , ___      ,
+     ___    , RPRN  	  , LEFT      , DOWN      , RGHT      , DLR                                   ,  P0       ,  P4       ,  P5       ,  P6       ,  PPLS     , ___      ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     ___    , COMM      , PGUP      , COLN      , PGDN      , ___	      , ___            , ___      , ___       , NP1       , NP2       , NP3       , NPDOT     , ___       ,
+     ___    , COMM      , PGUP      , COLN      , PGDN      , ___	      , ___            , ___      , ___       ,  P1       ,  P2       ,  P3       ,  PDOT     , ___       ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  ___       , ___       , ___            , ___      , NP0       , NTM
+                                                  ___       , ___       , ___            , ___      ,  P0       , NTM
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -270,7 +276,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC____         , KC____   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
-                                                  KC_LALT   , KC____    , KC_NO          , KC_LCTL  , KC_SF     , KC_NO 
+                                                  KC_LCTL   , KC____    , KC_LALT        , KC_LCTL  , KC_SF     , KC_NO 
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
   ),
 
@@ -283,7 +289,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , KC____    , KC____    , KC_D      , KC____    , KC____                                , KC____    , KC____    , KC____    , KC____    , KC____    , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , KC____    , KC____    , KC____    , KC____    , KC____	  , KC____         , KC____   , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
+     KC____ , KC____    , KC____    , KC____    , DF_CTR2   , KC____	  , KC____         , KC____   , KC____    , KC____    , KC____    , KC____   , KC____    , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
                                                   KC____    , KC____    , KC_NO          , KC____   , KC_SF     , KC____
   //                                             `----------+-----------+-----------'    `----------+-----------+-----------'
@@ -291,6 +297,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void persistent_default_layer_set(uint16_t default_layer) {
+  eeconfig_update_default_layer(default_layer);
+  default_layer_set(default_layer);
+}
 
 // control IME
 void dance_langnime_finished (qk_tap_dance_state_t *state, void *user_data) {
@@ -487,27 +497,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     //macros for marks
     ///////////////////////////////////////////////// (not use)
-    case DM_BRCT:
-      if (record->event.pressed) {
-        // when keycode DM_BRCT is pressed
-        SEND_STRING("()"SS_TAP(X_LEFT));
-      }
-      return false;
-      break;
-    case DM_BRCTL:
-      if (record->event.pressed) {
-        // when keycode DM_BRCTL is pressed
-        SEND_STRING("[]"SS_TAP(X_LEFT));
-      }
-      return false;
-      break;
-    case DM_BRCTM:
-      if (record->event.pressed) {
-        // when keycode DM_BRCTM is pressed
-        SEND_STRING("{}"SS_TAP(X_LEFT));
-      }
-      return false;
-      break;
+    // case DM_BRCT:
+    //   if (record->event.pressed) {
+    //     // when keycode DM_BRCT is pressed
+    //     SEND_STRING("()"SS_TAP(X_LEFT));
+    //   }
+    //   return false;
+    //   break;
+    // case DM_BRCTL:
+    //   if (record->event.pressed) {
+    //     // when keycode DM_BRCTL is pressed
+    //     SEND_STRING("[]"SS_TAP(X_LEFT));
+    //   }
+    //   return false;
+    //   break;
+    // case DM_BRCTM:
+    //   if (record->event.pressed) {
+    //     // when keycode DM_BRCTM is pressed
+    //     SEND_STRING("{}"SS_TAP(X_LEFT));
+    //   }
+    //   return false;
+    //   break;
     //////////////////////////////////////////////////
     case DM_SSTT:
       if (record->event.pressed) {
@@ -564,6 +574,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case IM_EN:
       if (record->event.pressed) {
         // when keycode IM_EN is pressed
+        persistent_default_layer_set(1UL<< 0) ;
         SEND_STRING(SS_TAP(X_F23));        
         layer_clear();
         layer_on(0);
@@ -573,6 +584,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case IM_JP:
       if (record->event.pressed) {
         // when keycode IM_JP is pressed
+        persistent_default_layer_set(1UL<< 2) ;
         SEND_STRING(SS_TAP(X_F24));
         layer_clear();
         layer_on(2);
@@ -609,47 +621,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case DF_CTR2:
+      if (record->event.pressed) {
+        register_code (KC_LCTL);
+        unregister_code (KC_LCTL);
+        register_code (KC_LCTL);
+        unregister_code (KC_LCTL);
+      }
+      return false;
+      break;
   }
   return true;
 };
 
-//macros for numpad
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
-    if (record->event.pressed) {
-        switch(id) {
-            case 0:
-                return MACRO(T(NLCK), T(P0), T(NLCK), END);
-            case 1:
-                return MACRO(T(NLCK), T(P1), T(NLCK), END);
-            case 2:
-                return MACRO(T(NLCK), T(P2), T(NLCK), END);
-            case 3:
-                return MACRO(T(NLCK), T(P3), T(NLCK), END);
-            case 4:
-                return MACRO(T(NLCK), T(P4), T(NLCK), END);
-            case 5:
-                return MACRO(T(NLCK), T(P5), T(NLCK), END);
-            case 6:
-                return MACRO(T(NLCK), T(P6), T(NLCK), END);
-            case 7:
-                return MACRO(T(NLCK), T(P7), T(NLCK), END);
-            case 8:
-                return MACRO(T(NLCK), T(P8), T(NLCK), END);
-            case 9:
-                return MACRO(T(NLCK), T(P9), T(NLCK), END);
-            case 10:
-                return MACRO(T(NLCK), T(PDOT), T(NLCK), END);
-            case 11:
-                return MACRO(T(NLCK), T(PEQL), T(NLCK), END);
-            case 12:
-                return MACRO(T(NLCK), T(PPLS), T(NLCK), END);
-            case 13:
-                return MACRO(T(NLCK), T(PMNS), T(NLCK), END);
-            case 14:
-                return MACRO(T(NLCK), T(PAST), T(NLCK), END);
-            case 15:
-                return MACRO(T(NLCK), T(PSLS), T(NLCK), END);
-        }
-    }
-    return MACRO_NONE;
-};
+// //macros for numpad
+// const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
+//     if (record->event.pressed) {
+//         switch(id) {
+//             case 0:
+//                 return MACRO(T(NLCK), T(P0), T(NLCK), END);
+//             case 1:
+//                 return MACRO(T(NLCK), T(P1), T(NLCK), END);
+//             case 2:
+//                 return MACRO(T(NLCK), T(P2), T(NLCK), END);
+//             case 3:
+//                 return MACRO(T(NLCK), T(P3), T(NLCK), END);
+//             case 4:
+//                 return MACRO(T(NLCK), T(P4), T(NLCK), END);
+//             case 5:
+//                 return MACRO(T(NLCK), T(P5), T(NLCK), END);
+//             case 6:
+//                 return MACRO(T(NLCK), T(P6), T(NLCK), END);
+//             case 7:
+//                 return MACRO(T(NLCK), T(P7), T(NLCK), END);
+//             case 8:
+//                 return MACRO(T(NLCK), T(P8), T(NLCK), END);
+//             case 9:
+//                 return MACRO(T(NLCK), T(P9), T(NLCK), END);
+//             case 10:
+//                 return MACRO(T(NLCK), T(PDOT), T(NLCK), END);
+//             case 11:
+//                 return MACRO(T(NLCK), T(PEQL), T(NLCK), END);
+//             case 12:
+//                 return MACRO(T(NLCK), T(PPLS), T(NLCK), END);
+//             case 13:
+//                 return MACRO(T(NLCK), T(PMNS), T(NLCK), END);
+//             case 14:
+//                 return MACRO(T(NLCK), T(PAST), T(NLCK), END);
+//             case 15:
+//                 return MACRO(T(NLCK), T(PSLS), T(NLCK), END);
+//         }
+//     }
+//     return MACRO_NONE;
+// };
