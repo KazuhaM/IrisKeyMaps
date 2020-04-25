@@ -67,7 +67,8 @@ enum custom_keycodes {
     DF_WOXPASS,
     
     //layer change codes
-    CL_NTM
+    CL_NTM,
+    DF_PST
 };
 
 //keycode shorthands
@@ -265,7 +266,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , C(KC_Y)   , G(KC_R)   , C(KC_R)   , C(KC_F)   , KC_DRNSH                              , KC_WOXM   , KC_HOME   , KC_UP     , KC_END    , C(KC_P)   , KC____    ,
   //|-------+-----------+-----------+-----------+-----------+-----------|                           |-----------+-----------+-----------+-----------+-----------+-----------|
-     KC____ , C(KC_A)   , C(KC_S)   , C(KC_D)   , A(KC_A)   , KC_WOXP                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
+     KC____ , C(KC_A)   , C(KC_S)   , DF_PST    , A(KC_A)   , KC_WOXP                               , KC_NO     , KC_LEFT   , KC_DOWN   , KC_RGHT   , KC_NO     , KC_NO     ,
   //|-------+-----------+-----------+-----------+-----------+-----------+-----------.    ,----------|-----------+-----------+-----------+-----------+-----------+-----------|
      KC____ , C(KC_Z)   , C(KC_X)   , C(KC_C)   , C(KC_V)   , KC_SPC	  , KC____         , KC____   , KC____    , KC_PGUP   , KC_NO     , KC_PGDN   , KC_NO     , KC____    ,
   //`-------+-----------+-----------+-----------+-----------+-----------+-----------/    \----------+-----------+-----------+-----------+-----------+-----------+-----------'
@@ -586,6 +587,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }else{
         layer_off(4);
         layer_on(5);
+      }
+      return false;
+      break;
+    case DF_PST:
+      if (record->event.pressed) {
+        // when keycode DF_RNMSH is pressed
+        if ((layer_state / 4) % 2 == 1){
+          persistent_default_layer_set(1UL<< 0) ;
+          SEND_STRING(SS_TAP(X_F23));
+          layer_clear();
+          layer_on(0);
+          layer_off(2);
+        }
+        register_code (KC_LCTL);
+        register_code (KC_LALT);
+        register_code (KC_G);
+        unregister_code (KC_G);
+        unregister_code (KC_LALT);
+        unregister_code (KC_LCTL);
       }
       return false;
       break;
